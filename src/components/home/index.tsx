@@ -194,11 +194,11 @@ export function HomeDashBoard() {
                         <Subheading>Insights</Subheading>
                         <div className='flex justify-between'>
 
-                        <div>
+                        <div className='flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4'>
                         <Button
                           // variant="outline"
                           icon={<ChartBarBig />}
-                          // className="bg-lime-500 text-white w-auto"
+                          className="w-50"
                           onClick={() => router.push(`/rank/${account.benchmarkProfileId}`)}
                           >
                              Rank
@@ -207,14 +207,13 @@ export function HomeDashBoard() {
                         <Button
                           icon={<FileChartColumn />}
                           // variant="secondary"
-                            className='ml-2'
+                            className="w-50"
                             onClick={() => router.push(`/content/${account.benchmarkProfileId}`)}>Posts
                           </Button>
-                        <Button icon={<Lightbulb />} className='ml-2' onClick={() => router.push(`/generate/${account.benchmarkProfileId}`)}>New idea</Button>
+                        <Button icon={<Lightbulb />} className="w-50" onClick={() => router.push(`/generate/${account.benchmarkProfileId}`)}>New idea</Button>
                         </div>
                         <div>
-                        {/* <Button variant="destructive" className='ml-2 bg-red-500 text-white w-auto' onClick={() => router.push(`/generate/${account.benchmarkProfileId}`)}><Trash2 /></Button> */}
-                        <DeleteAccount refreshRanking={refreshRanking} icon={<Trash2 />} variant="destructive" className='ml-2' profileAccount={account} />
+                          <DeleteAccount refreshRanking={refreshRanking} icon={<Trash2 />} variant="destructive" className='ml-2' profileAccount={account} />
                         </div>
                         </div>
                       </AccordionContent>
