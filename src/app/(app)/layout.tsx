@@ -7,20 +7,12 @@ import { ApplicationLayout } from './application-layout'
 import { useRouter } from 'next/navigation'
 import { Toaster } from '@/components/ui/toaster'
 
-// export const metadata: Metadata = {
-//   title: {
-//     template: '%s - Catalyst',
-//     default: 'Catalyst',
-//   },
-//   description: '',
-// }
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // let events = await getEvents()
   const router = useRouter()
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('accessToken')
-    if (!token) router.push('/auth/login')
+    if (!token) router.push('/auth/signup')
   }
   return (
     <html
