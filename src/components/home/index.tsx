@@ -156,6 +156,12 @@ export function HomeDashBoard() {
     }
     fetchData()
   },[])
+
+  useEffect(() => {
+
+    console.log('rankData', rankData)
+    console.log('isEmptyObject', isEmptyObject(rankData))
+  }, [rankData])
   return (
     <div>
       {/* <Heading>Content direction</Heading>
@@ -242,8 +248,6 @@ export function HomeDashBoard() {
         
     {!isLoadingRanking && (
 <div className='mt-10'>
-{console.log('rankData', rankData)}
-{console.log('isEmptyObject', isEmptyObject(rankData))}
       <AddAccount className="mt-4 w-full" isEmptyState={isEmptyObject(rankData)} refreshRanking={refreshRanking} >Add Instagram account</AddAccount>
 </div>
 
