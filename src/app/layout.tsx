@@ -1,13 +1,5 @@
 import type React from 'react'
-import { SessionProvider } from 'next-auth/react'
-
-const NextAuthSessionProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
-  return <SessionProvider>{children}</SessionProvider>
-}
+import { NextAuthSessionProvider } from '@/providers/sessionProvider'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
