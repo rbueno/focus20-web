@@ -5,7 +5,7 @@ export const Compass = ({ degrees = 0, isLoading = false }) => {
   const [oscillation, setOscillation] = useState(0);
 
   useEffect(() => {
-    let animationId;
+    let animationId: number
     if (isLoading) {
       const animate = () => {
         setRotation(prev => (prev + 10) % 360);
@@ -39,14 +39,14 @@ export const Compass = ({ degrees = 0, isLoading = false }) => {
 
   const oscillationOffset = Math.sin(oscillation) * 3;
 
-  const createArc = (startAngle, endAngle, color) => {
+  const createArc = (startAngle: number, endAngle: number, color: string) => {
     const start = polarToCartesian(32, 32, 30, endAngle);
     const end = polarToCartesian(32, 32, 30, startAngle);
     const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
     return `M ${start.x} ${start.y} A 30 30 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
   };
 
-  const polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
+  const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
     return {
       x: centerX + (radius * Math.cos(angleInRadians)),
