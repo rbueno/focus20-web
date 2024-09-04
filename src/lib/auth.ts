@@ -80,7 +80,8 @@ export const authOptions: NextAuthOptions = {
             user.info = { workspaceId: workspaceId, ...userInfo }
             return true
           } catch (error) {
-            console.error(error)
+            console.dir(error, { depth: null })
+
             return false
           }
         },

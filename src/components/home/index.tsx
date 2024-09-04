@@ -23,6 +23,7 @@ import { Input } from '@/components/input'
 import { Text } from '@/components/text'
 import { Compass } from '@/components/compass'
 import { Skeleton } from '../ui/skeleton'
+import { isEmptyObject } from '@/lib/utils'
 
 export default function SkeletonLeaderboard() {
   return (
@@ -137,11 +138,12 @@ export function HomeDashBoard() {
   };
 
   useEffect(() => {
+    setIsLoadingRanking(true)
     async function fetchData() {
       try {
         const { data } = await apiClient.get(`/v1/benchmark/instagram/ranking`)
         console.log('home data', data)
-        const difference = differenceInMinutes(new Date(), new Date(data.updatedAt))
+        const difference = differenceInMinutes(new Date(), new Date(data?.updatedAt))
         if (difference > 30) {
           await refreshRanking()
           return
@@ -150,6 +152,7 @@ export function HomeDashBoard() {
       } catch (error) {
         console.log(error)
       }
+      setIsLoadingRanking(false)
     }
     fetchData()
   },[])
@@ -170,7 +173,7 @@ export function HomeDashBoard() {
         {rankData && !isLoadingRanking && (
           <div className='mt-6'>
             {rankData?.updatedAt && (
-              <p className="text-xs/5 text-muted-foreground">Last update: {format(new Date(rankData.updatedAt), 'dd/MM/yyyy HH:mm:ss')}</p>
+              <p className="text-xs/5 text-muted-foreground">Last update: {format(new Date(rankData?.updatedAt), 'dd/MM/yyyy HH:mm:ss')}</p>
             )}
             
             {!isLoadingRanking && rankData.ranking?.map((account: any) => (
@@ -240,7 +243,7 @@ export function HomeDashBoard() {
     {!isLoadingRanking && (
 <div className='mt-10'>
 
-      <AddAccount className="mt-4 w-full" isEmptyState={!rankData} refreshRanking={refreshRanking} >Add new account</AddAccount>
+      <AddAccount className="mt-4 w-full" isEmptyState={isEmptyObject(rankData)} refreshRanking={refreshRanking} >Add Instagram account</AddAccount>
 </div>
 
     )}

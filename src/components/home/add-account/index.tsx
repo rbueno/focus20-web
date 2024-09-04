@@ -83,7 +83,7 @@ export function AddAccount({ isEmptyState, refreshRanking, ...props }: { isEmpty
 
   return (
     <>
-    { isEmptyState ? <AddAccountEmptyState setIsOpen={setIsOpen} /> : <Button type="button" onClick={() => setIsOpen(true)} {...props} />}
+    { isEmptyState ? <AddAccountEmptyState setIsOpen={setIsOpen} /> : <Button icon={<Instagram />} type="button" onClick={() => setIsOpen(true)} {...props} />}
       
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Add Instagram</DialogTitle>
