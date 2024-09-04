@@ -1,16 +1,15 @@
-'use client'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import '@/styles/tailwind.css'
 import type React from 'react'
 import { Toaster } from '@/components/ui/toaster'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('accessToken')
-    if (token) router.push('/')
-  }
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+  console.log('RootAuth session', session)
+  if (session) redirect('/')
   return (
     <html
       lang="en"

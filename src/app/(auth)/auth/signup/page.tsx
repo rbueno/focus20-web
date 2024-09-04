@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader } from "@/components/card"
 import { toast } from "sonner"
 import { AxiosError } from "axios"
 import { AuthHeader } from "@/components/auth"
+import {Chrome, Facebook} from 'lucide-react'
 
 export default function AuthLogin() {
   const [email, setEmail] = useState('')
@@ -62,20 +63,27 @@ export default function AuthLogin() {
 <Card>
       <CardContent className="mt-6">
       
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Register free trial</h1>
-          <p className="text-muted-foreground">Enter your email and password below to create a new trial account.</p>
-        </div>
-        <div className="space-y-4">
-          {/* <Button onClick={() => signIn('google')} variant="outline" className="w-full">
-            <ChromeIcon className="mr-2 h-5 w-5" />
-            Sign in with Google
-          </Button>
-          <Button variant="outline" className="w-full">
-            <FacebookIcon className="mr-2 h-5 w-5" />
-            Sign in with Facebook
-          </Button>
-          <div className="relative">
+      
+
+
+        <div className="mx-auto max-w-md space-y-6">
+          <div className="space-y-2 text-center">
+            <h1 className="text-3xl font-bold">Register free trial</h1>
+            <p className="text-muted-foreground">Create a new trial account</p>
+
+
+          </div>
+
+          <div className="space-y-4">
+          <Button onClick={() => signIn('google')} icon={<Chrome />} variant="outline" className="w-full bg-[#DB4437] text-white hover:bg-[#c53b2e]">
+              Create with Gmail
+            </Button>
+            {/* <Button icon={<Facebook className="mr-2 h-5 w-5" />} variant="outline" className="w-full bg-[#1877F2] text-white hover:bg-[#1366d6]">
+              Sign in with Facebook
+            </Button> */}
+          </div>
+
+          {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -83,7 +91,9 @@ export default function AuthLogin() {
               <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div> */}
-          <form className="space-y-4">
+
+          {/* <div className="space-y-4">
+            <form className="space-y-4">
             <div className="space-y-1 mt-6">
               <Label htmlFor="email">Email</Label>
               <Input value={email} onChange={(e) => setEmail(e.target.value)} id="email" type="email" placeholder="m@example.com" required />
@@ -93,16 +103,23 @@ export default function AuthLogin() {
               <Input value={password} onChange={(e) => setPassword(e.target.value)} id="password" type="password" required />
             </div>
             <Button isLoading={isLoading} type="button" className="w-full" onClick={() => handleCredentialLogin()}>
-              Create account
+              Sign in
             </Button>
           </form>
-          <div className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
-            <Link href="/auth/login" className="font-medium underline underline-offset-4" prefetch={false}>
-              Login
-            </Link>
+          </div> */}
+
+
+          <div className="space-y-4">
+         
+                <div className="text-center text-sm text-muted-foreground">
+                Already have an account?{" "}
+                  <Link href="/auth/login" className="font-medium underline underline-offset-4" prefetch={false}>
+                    Login
+                  </Link>
+                </div>
           </div>
-        </div>
+
+      </div>
         </CardContent>
         </Card>
       </div>

@@ -21,6 +21,7 @@ import { Dialog, DialogActions, DialogBody, DialogDescription, DialogTitle } fro
 import { Field, FieldGroup, Label } from '@/components/fieldset'
 import { Input } from '@/components/input'
 import { Text } from '@/components/text'
+import { Compass } from '@/components/compass'
 import { Skeleton } from '../ui/skeleton'
 
 export default function SkeletonLeaderboard() {
@@ -106,6 +107,9 @@ export function HomeDashBoard() {
   const router = useRouter()
   const [rankData, setRankData] = useState<any>({})
   const [isLoadingRanking, setIsLoadingRanking] = useState(false)
+  const [degrees, setDegrees] = useState(0);
+  const [inputDegrees, setInputDegrees] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const redirectAccount = async (accountId: string) => {
     router.push(`/insights/${accountId}`)
@@ -124,15 +128,21 @@ export function HomeDashBoard() {
     setIsLoadingRanking(false)
   }
 
+  const handleInputChange = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setDegrees(Number(inputDegrees));
+      setIsLoading(false);
+    }, 2000);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
         const { data } = await apiClient.get(`/v1/benchmark/instagram/ranking`)
-        console.log('data', data)
+        console.log('home data', data)
         const difference = differenceInMinutes(new Date(), new Date(data.updatedAt))
-        console.log('difference', difference)
-        console.log('difference', difference > 1)
-        if (difference > 1) {
+        if (difference > 30) {
           await refreshRanking()
           return
         }
@@ -145,9 +155,11 @@ export function HomeDashBoard() {
   },[])
   return (
     <div>
+      {/* <Heading>Content direction</Heading>
+      <Subheading>Check if your content is going in the right direction</Subheading>
+      <Compass degrees={degrees} isLoading={isLoading} /> */}
       <Heading>Leaderboard</Heading>
       <Subheading>Ranking Instagram accounts</Subheading>
-      
       {
         isLoadingRanking && (
           <div className='mt-8'>
@@ -158,7 +170,7 @@ export function HomeDashBoard() {
         {rankData && !isLoadingRanking && (
           <div className='mt-6'>
             {rankData?.updatedAt && (
-              <Subheading className='text-muted-foreground'>Last update: {format(new Date(rankData.updatedAt), 'dd/MM/yyyy HH:mm:ss')}</Subheading>
+              <p className="text-xs/5 text-muted-foreground">Last update: {format(new Date(rankData.updatedAt), 'dd/MM/yyyy HH:mm:ss')}</p>
             )}
             
             {!isLoadingRanking && rankData.ranking?.map((account: any) => (

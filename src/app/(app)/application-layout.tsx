@@ -46,12 +46,14 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { CircleUser } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { signOut } from 'next-auth/react'
 
 function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' }) {
   const router = useRouter()
   const handleSingOut = () => {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('workspaceId')
+    // localStorage.removeItem('accessToken')
+    // localStorage.removeItem('workspaceId')
+    signOut({ callbackUrl: '/' })
   }
 
   return (
@@ -80,9 +82,11 @@ function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' })
 
 export function ApplicationLayout({
   events,
+  user,
   children,
 }: {
   events: Awaited<ReturnType<typeof getEvents>>
+  user: any
   children: React.ReactNode
 }) {
   const [userEmail, setUserEmail] = useState('')
@@ -123,20 +127,16 @@ export function ApplicationLayout({
     <img src="/assets/logo.png" className='w-[80%]' alt='Focus20 logo' />
           </SidebarHeader>
 
-         
-
-          
-
           <SidebarFooter>
             <Dropdown>
               <DropdownButton as={SidebarItem}>
                 <span className="flex min-w-0 items-center gap-3">
-                  {/* <Avatar src="/users/erica.jpg" className="size-10" square alt="" /> */}
-                  <CircleUser className='h-6 w-6'/>
+                  <Avatar src={user?.image} className="size-10" square alt="" />
+                  {/* <CircleUser className='h-6 w-6'/> */}
                   <span className="min-w-0">
-                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">User</span>
+                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{user?.name}</span>
                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                      {userEmail}
+                      {user?.email}
                     </span>
                   </span>
                 </span>

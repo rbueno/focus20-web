@@ -83,12 +83,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <Loading />
         ) : (
           <>
-            {children && <span className="flex-grow">{children}</span>}
             {icon && (
               <span className={cn('flex flex-shrink-0', iconClasses)}>
                 {icon}
               </span>
             )}
+            {children && <span className="flex-grow">{children}</span>}
           </>
         )}
       </Comp>
