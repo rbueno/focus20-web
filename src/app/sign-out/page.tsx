@@ -5,22 +5,23 @@ import { signOut, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 const SignOutPage = () => {
-  const { status } = useSession()
+  const session = useSession()
   const router = useRouter()
 
   useEffect(() => {
     async function handleLogout() {
-      if (status === 'unauthenticated') {
+      console.log('session signout', session)
+      if (session?.status === 'unauthenticated') {
         router.push('/')
         return
       }
-      if (status === 'authenticated' || status === 'loading') {
+      if (session?.status === 'authenticated' || session?.status === 'loading') {
         await new Promise((resolve) => setTimeout(resolve, 1000))
         await signOut({ redirect: false })
       }
     }
     handleLogout()
-  }, [router, status])
+  }, [router, session])
 
   return (
     <>
