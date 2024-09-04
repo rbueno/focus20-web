@@ -102,7 +102,7 @@ export function AddAccount({ isEmptyState, refreshRanking, ...props }: { isEmpty
                     <Text className='text-red-500 font-bold'>Invalid username. Only business accounts are allowed</Text>
                   </div>
                 )}
-            <Button isLoading={isFindingProfile} className='w-full' onClick={() => getProfile()}>Find profile</Button>
+            <Button isLoading={isFindingProfile} className='w-full mt-2' onClick={() => getProfile()}>Find profile</Button>
               </Field>
               )
             }

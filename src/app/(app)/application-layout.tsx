@@ -105,8 +105,8 @@ export function ApplicationLayout({
           <NavbarSection>
             <Dropdown>
               <DropdownButton as={NavbarItem}>
-                {/* <Avatar src="/users/erica.jpg" square /> */}
-                <CircleUser className='h-6 w-6'/>
+                <Avatar src={user?.image} className="size-10" square alt="" />
+                {/* <CircleUser className='h-6 w-6'/> */}
               </DropdownButton>
               <AccountDropdownMenu anchor="bottom end" />
             </Dropdown>
