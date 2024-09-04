@@ -1,7 +1,7 @@
 import type React from 'react'
 import { SessionProvider } from 'next-auth/react'
 
-export const NextAuthSessionProvider = ({
+const NextAuthSessionProvider = ({
   children,
 }: {
   children: React.ReactNode
