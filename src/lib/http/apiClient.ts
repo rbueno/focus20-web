@@ -25,8 +25,6 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(async(config) => {
     const session = await getSession() as any
-    console.log('session hook', session)
-    console.log('workspace id', session?.user?.workspaceId)
 
     if (session?.accessToken) {
         config.headers.Authorization = `Bearer ${session?.accessToken}`

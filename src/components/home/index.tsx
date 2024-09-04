@@ -157,11 +157,6 @@ export function HomeDashBoard() {
     fetchData()
   },[])
 
-  useEffect(() => {
-
-    console.log('rankData', rankData)
-    console.log('isEmptyObject', isEmptyObject(rankData))
-  }, [rankData])
   return (
     <div>
       {/* <Heading>Content direction</Heading>
