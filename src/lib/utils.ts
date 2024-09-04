@@ -6,5 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const isEmptyObject = (obj: object) => {
-  return obj && typeof obj === 'object' && Object.keys(obj).length === 0
+  if (!obj) return true
+  if (typeof obj !== 'object') return true
+  return Object.keys(obj).length === 0
 }
